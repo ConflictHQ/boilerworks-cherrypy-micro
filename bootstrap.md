@@ -45,7 +45,7 @@ CherryPy (built-in HTTP server)
 - `docker compose up -d --build` starts API + Postgres
 - Migrations run on app startup (no separate migration container)
 - Seed creates admin key with `['*']` scopes (logged to stdout once)
-- API exposed on host port 8083, Postgres on 5440
+- API exposed on host port 8000, Postgres on 5432
 
 ### Seed API Key
 On first boot, check container logs for the plaintext key:
@@ -56,4 +56,4 @@ docker compose logs api | grep "Plaintext key"
 ### Testing
 - Integration tests use requests against a real CherryPy server + Postgres
 - Server starts on a random port in a background thread
-- Default test DATABASE_URL: `postgresql://postgres:postgres@localhost:5440/boilerworks`
+- Default test DATABASE_URL: `postgresql://postgres:postgres@localhost:5432/boilerworks`
