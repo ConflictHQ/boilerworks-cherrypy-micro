@@ -25,9 +25,8 @@ We will acknowledge your report within 48 hours and aim to release a fix within 
 
 When deploying Boilerworks:
 
-- Change all default credentials (database, MinIO, session secret)
-- Use HTTPS in production
-- Set `NODE_ENV=production`
-- Configure `CORS_ORIGINS` to your domain only
-- Use strong Auth0 credentials
-- Review the security hardening in `bootstrap.md`
+- Rotate the seed API key: set `API_KEY_SEED` to a strong random value (never ship `bw_seed_key_change_me_in_production`), then mint scoped keys via `/api-keys/` and revoke the seed key
+- Change the default Postgres credentials in `docker-compose.yml` / `DATABASE_URL`
+- Serve over HTTPS via a reverse proxy (nginx, Caddy, or a load balancer) — CherryPy's built-in server listens on plain HTTP
+- Grant keys the narrowest scopes that work (`events.read`, `events.write`, `keys.manage`); reserve `*` for administration
+- Do not expose the Postgres port to the public internet

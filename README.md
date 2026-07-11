@@ -20,8 +20,10 @@
 # Start services
 docker compose up -d --build
 
-# Get your seed API key (shown once on first boot)
-docker compose logs api | grep "Plaintext key"
+# The compose file pins the seed key via API_KEY_SEED, so it is
+# bw_seed_key_change_me_in_production out of the box. If you override
+# API_KEY_SEED, the key is also logged once on first boot:
+#   docker compose logs api | grep "Plaintext key"
 
 # Test it
 curl http://localhost:8000/health/
